@@ -1,0 +1,13 @@
+gnomonic.py
+
+node_modules/
+
+.eslintrc.cjs
+logs
+*.log
+.vscode-test
+.vscode
+
+.DS_Store
+./src/.DS_Store
+
