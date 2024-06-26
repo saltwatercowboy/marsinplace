@@ -2,6 +2,8 @@ gnomonic.py
 
 node_modules/
 
+dist
+
 .eslintrc.cjs
 logs
 *.log
