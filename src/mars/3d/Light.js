@@ -1,7 +1,7 @@
 import { DirectionalLight, AmbientLight } from 'three';
 
 const createLight = ()=>{
-    const ambientLight = new AmbientLight('#c0bfad', 5);
+    const ambientLight = new AmbientLight('#c0bfad', 0.5);
 
     const mainLight = new DirectionalLight('#c0bfad', 3);
     const softenerLightLower = new DirectionalLight('#c0bfad', 0.5);

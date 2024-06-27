@@ -1,7 +1,5 @@
 <template>
-  <div id="scene-container">
-   
-  </div>
+  <div id="scene-container"></div>
 </template>
 
 <script>
@@ -28,8 +26,8 @@ export default {
 <style scoped>
 
 #scene-container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-color: black;
 }
 

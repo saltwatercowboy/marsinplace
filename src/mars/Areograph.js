@@ -71,9 +71,7 @@ class Areograph {
     }
   }
 
-  render() {
-    this.renderer.render(this.scene, this.camera);
-  }
+  //render removed
 
   start() {
     loop.start();
@@ -225,7 +223,7 @@ class Areograph {
   }
 
   onClick(event) {
-    
+    event.preventDefault();
     if (this.hoveredObject) {
       if (this.hoveredObject.material && this.hoveredObject.material.color) {
         this.hoveredObject.material.color.set(this.hoveredObject.originalColor);
