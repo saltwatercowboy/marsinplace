@@ -1,4 +1,4 @@
-const setSize = (container, camera, renderer)=>{
+const setSize = (container, camera, renderer, composer)=>{
     // Set the camera's aspect ratio
     camera.aspect = container.clientWidth / container.clientHeight;
 
@@ -13,11 +13,11 @@ const setSize = (container, camera, renderer)=>{
 }
 
 class Resizer{
-   constructor(container, camera, renderer){
-      setSize(container, camera, renderer);
+   constructor(container, camera, renderer, composer){
+      setSize(container, camera, renderer, composer);
 
        window.addEventListener('resize', ()=>{
-           setSize(container, camera, renderer);
+           setSize(container, camera, renderer, composer);
        });
    }
 }

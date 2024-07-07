@@ -53,7 +53,7 @@ class Places {
     this.placeData.forEach(this.createPins);
   }
 
-  // Utility
+  //utility
   getType() {
     return this.placeType;
   }
@@ -62,12 +62,12 @@ class Places {
     return this.placeData;
   }
 
-  // True or false
+  //true or false
   setActive(isActive) {
     this.isActive = isActive;
   }
 
-  // Returns object
+  //returns object
   assignPlaceData() {
     if (this.dataList.placeData[this.placeType]) {
       this.placeData = this.dataList.placeData[this.placeType];
@@ -76,11 +76,11 @@ class Places {
     }
   }
 
-  // Assigns location in x, y, z on a sphere (technically a cube sphere) based on lat and lon coordinates
+  //assigns location in x, y, z on a sphere (technically a quad sphere) based on lat and lon coordinates
   findPosition(item) {
     switch (item.body) {
-      case 'Mars':
-        var r = 200; // Radius of planetary body
+      case 'Mars': //add functionality for deimos/phobos !todo
+        var r = 200; //radius of planetary body
         var phi = ((90 - item.lat) * Math.PI) / 180;
         var theta = ((180 + item.lon) * Math.PI) / 180;
 
@@ -107,19 +107,19 @@ class Places {
     const lineLength = 20;
     const lineLengthDiamond = 1;
 
-    // Scale the normal vector to set the end point of the line
+    //scale the normal vector to set the end point of the line
     const endPoint = startPoint.clone().add(normalVector.multiplyScalar(lineLength));
     const endPointDiamond = startPoint.clone().add(normalVector.multiplyScalar(lineLengthDiamond));
 
     const points = [];
-    points.push(startPoint); // Start point on the surface
-    points.push(endPoint);   // End point in the direction of the normal vector
+    points.push(startPoint); //start point on the surface
+    points.push(endPoint);   //end point in the direction of the normal vector
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
     const material = new THREE.LineBasicMaterial({ color: '#7FFFFF' });
     const line = new THREE.Line(geometry, material);
 
-    // Create just one triangle
+    //create just one triangle
     const front = Math.tan(Math.PI / 6);
     const back = Math.cos(Math.PI / 6);
     const vertices = [
@@ -137,6 +137,7 @@ class Places {
       1, 4, 3, // Right, bottom, back
       3, 4, 2, // Back, bottom, left
     ];
+    
     const diamondGeometry = new THREE.PolyhedronGeometry(vertices, faces, 2, 0);
     const diamondMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: '#7FFFFF' });
     const diamondMesh = new THREE.Mesh(diamondGeometry, diamondMaterial);

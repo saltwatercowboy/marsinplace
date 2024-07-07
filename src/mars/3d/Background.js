@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
-
-function createScene(){
+function createBackground(){
     const scene = new THREE.Scene();
 
     const background = new THREE.CubeTextureLoader()
@@ -13,12 +12,17 @@ function createScene(){
           'ny.png',
           'pz.png',
           'nz.png'
-        ] );
+        ]
+    );
+    background.mapping = THREE.CubeRefractionMapping;
+    background.magFilter = THREE.NearestFilter;
+    background.minFilter = THREE.NearestFilter;
 
     const bgColor = new THREE.Color( 'white' )
     scene.background = background;
+    background.dispose();
 
     return scene;
 }
 
-export { createScene };
+export { createBackground };

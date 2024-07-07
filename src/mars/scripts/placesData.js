@@ -2,24 +2,7 @@
 
 const placeData = {
 
-    film: [
-        {   
-            id: 1,
-            body: 'Mars',
-            placeName: 'The Hab',
-            media: 'The Martian',
-            creator: 'Andy Weir',
-            fictionalYear: 2035,
-            realYear: 2011,
-            description: 'A temporarily muscular botanist and ex-MIT mathematics prodigy loses religion in the dusty wastes of the red planet. Somehow not the worst thing that Andy Weir has written.',
-            region: 'Acidalia Planitia',
-            photoFile: '/src/World/assets/modal_images/underhill.png',
-            lat: 31.12,
-            lon: 28.5 - 90, //offset by -90 (investigate !why)
-            jewelColor: 'white'
-            //lat: 0,
-            //lon: -90,
-        },
+    literature: [
 
         {
             id: 2,
@@ -51,23 +34,6 @@ const placeData = {
             lat: 24.5,
             lon: 122.1, //offset by -25 (investigate !why)
             jewelColor: 'blue'
-
-        },
-
-        {
-            id: 4,
-            body: 'Mars',
-            placeName: "Bowie Base One",
-            media: 'Doctor Who',
-            creator: 'Russell T. Davies & Phil Ford',
-            fictionalYear: '2059',
-            realYear: 2009,
-            description: "",
-            region: 'Gusev Crater',
-            photoFile: '/src/World/assets/modal_images/underhill.png',
-            lat: 5.5,
-            lon: 176,
-            jewelColor: 'black'
 
         },
 
@@ -107,11 +73,42 @@ const placeData = {
 
     ],
 
-    televisionShows: [
-        
-    ],
+    filmAndTV: [
 
-    literature: [
+        {   
+            id: 1,
+            body: 'Mars',
+            placeName: 'The Hab',
+            media: 'The Martian',
+            creator: 'Andy Weir',
+            fictionalYear: 2035,
+            realYear: 2011,
+            description: 'A temporarily muscular botanist and ex-MIT mathematics prodigy loses religion in the dusty wastes of the red planet. Somehow not the worst thing that Andy Weir has written.',
+            region: 'Acidalia Planitia',
+            photoFile: '/src/World/assets/modal_images/underhill.png',
+            lat: 31.12,
+            lon: 28.5 - 90, //offset by -90 (investigate !why)
+            jewelColor: 'white'
+            //lat: 0,
+            //lon: -90,
+        },
+        
+        {
+            id: 4,
+            body: 'Mars',
+            placeName: "Bowie Base One",
+            media: 'Doctor Who',
+            creator: 'Russell T. Davies & Phil Ford',
+            fictionalYear: '2059',
+            realYear: 2009,
+            description: "",
+            region: 'Gusev Crater',
+            photoFile: '/src/World/assets/modal_images/underhill.png',
+            lat: 5.5,
+            lon: 176,
+            jewelColor: 'black'
+
+        },
 
     ],
 

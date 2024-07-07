@@ -2,10 +2,10 @@
 
 import * as THREE from 'three';
 
-import { createCamera } from "./3d/Camera.js";
+import { createCamera } from "./3d/MainCamera.js";
 import { createQuadrilateralizedSphericalCube } from "./3d/Mars.js";
-import { createScene } from "./3d/Scene.js";
-import { createLight } from "./3d/Light.js";
+import { createBackground } from "./3d/Background.js";
+import { createLight } from "./3d/Lighting.js";
 import { createPhobosDeimos } from "./3d/PhobosDeimos.js";
 
 import placeData from './scripts/placesData.js';
@@ -16,6 +16,12 @@ import { Resizer } from "./scripts/resizer.js";
 import { Loop } from "./scripts/animationLoop.js";
 import { createControls } from "./scripts/cameraControls.js";
 
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { SSAARenderPass } from 'three/addons/postprocessing/SSAARenderPass.js';
+
 let loop;
 let controls;
 let resizer;
@@ -23,7 +29,7 @@ let resizer;
 class Areograph {
   constructor(container) {
     this.camera = createCamera(container);
-    this.scene = createScene();
+    this.background = createBackground();
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
     this.hoveredObject = null;
@@ -34,21 +40,29 @@ class Areograph {
     container.append(this.renderer.domElement);
 
     //add Mars
-    this.scene.add(this.mars);
+    this.background.add(this.mars);
 
     //lighting
     const { mainLight, softenerLightLower, ambientLight } = createLight();
     this.mainLight = mainLight;
-    this.scene.add(mainLight, softenerLightLower, ambientLight);
+    this.background.add(mainLight, softenerLightLower, ambientLight);
 
     // Camera controls
     controls = createControls(this.camera, container);
 
     //window resizing
-    resizer = new Resizer(container, this.camera, this.renderer);
+    resizer = new Resizer(container, this.camera, this.renderer, this.composer);
+
+    this.composer = new EffectComposer( this.renderer );
+    this.composer.setPixelRatio(1);
+    this.ssaaPass = new SSAARenderPass( this.background, this.camera );
+    this.outputPass = new OutputPass();
+
+    //this.composer.addPass( this.ssaaPass );
+    //this.composer.addPass( this.outputPass );
 
     //animation
-    loop = new Loop(this.camera, this.scene, this.renderer);
+    loop = new Loop(this.camera, this.background, this.renderer, this.composer);
     loop.updatables.push(this.mars);
 
     //load + add Phobos and Deimos
@@ -63,9 +77,9 @@ class Areograph {
     try {
       const [phobos, deimos] = await createPhobosDeimos();
       this.phobos = phobos;
-      this.scene.add(this.phobos);
-      this.scene.add(deimos);
-      loop.updatables.push({ tick: () => phobos.tick(this.scene) });
+      this.background.add(this.phobos);
+      this.background.add(deimos);
+      loop.updatables.push({ tick: () => phobos.tick(this.background) });
     } catch (error) {
       console.error('Error loading moons:', error);
     }
@@ -81,20 +95,32 @@ class Areograph {
     loop.stop();
   }
 
+  //!todo restructure getPinsData to accept multiple filtering arguments and return a new array of pin objects
   createAllMarkers() {
-    var pmTest = new Places('film', placeData, true, 'Mars');
-    pmTest.createAll();
-    let i = pmTest.getPinsData();
+    var litPins = new Places('literature', placeData, true, 'Mars');
+    litPins.createAll();
+    let i = litPins.getPinsData();
+
+    var filmAndTVPins = new Places('filmAndTV', placeData, true, 'Mars')
+    filmAndTVPins.createAll();
+    let j = filmAndTVPins.getPinsData();
+
     for (let index = 0; index < i.length; index++) {
       this.mars.add(i[index].mesh);
       this.mars.add(i[index].diamondMesh);
       this.mars.add(i[index].jewelMesh);
     }
+
+    for (let index = 0; index < j.length; index++) {
+      this.mars.add(j[index].mesh);
+      this.mars.add(j[index].diamondMesh);
+      this.mars.add(j[index].jewelMesh);
+    }
   }
 
   createModal(item) {
     if (this.modal) {
-        this.scene.remove(this.modal);
+        this.background.remove(this.modal);
         this.modal.geometry.dispose();
         this.modal.material.map.dispose();
         this.modal.material.dispose();
@@ -179,7 +205,7 @@ class Areograph {
 
     this.modal.isModal = true;
 
-    this.scene.add(this.modal);
+    this.background.add(this.modal);
   }
 
   onMouseMove(event) {
@@ -189,7 +215,7 @@ class Areograph {
     this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    const intersects = this.raycaster.intersectObjects(this.scene.children, true);
+    const intersects = this.raycaster.intersectObjects(this.background.children, true);
 
 
     if (intersects.length > 0) {
