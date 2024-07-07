@@ -61,7 +61,7 @@ function createQuadrilateralizedSphericalCube() {
   )
   
   cube.tick = (delta) => {
-    //cube.rotation.y += (1 / 24  ) * delta;
+    cube.rotation.y += (1 / 24  ) * delta;
   };
 
   return cube
