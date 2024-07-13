@@ -7,7 +7,7 @@ function createCubeMaterial() {
   const px = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/px.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/px.png'), displacementScale: 2, displacementBias: -1 })
   const nx = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/nx.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/nx.png'), displacementScale: 2, displacementBias: -1 })
   const py = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/py.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/py.png'), displacementScale: 2, displacementBias: -1 })
-  const ny = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/ny.png')})
+  const ny = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/ny.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/ny.png'), displacementScale: 2, displacementBias: -1 })
   const pz = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/pz.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/pz.png'), displacementScale: 2, displacementBias: -1 })
   const nz = new THREE.MeshPhongMaterial({ shininess: 10, map: texLoader.load('textures/mars/mars_cubemap_4k/nz.png'), displacementMap: texLoader.load('textures/mars/mars_cubemap_4k_displacementmaps/nz.png'), displacementScale: 2, displacementBias: -1 })
 
@@ -61,7 +61,7 @@ function createQuadrilateralizedSphericalCube() {
   )
   
   cube.tick = (delta) => {
-    cube.rotation.y += (1 / 24  ) * delta;
+    cube.rotation.y += (1 / 48 ) * delta;
   };
 
   return cube

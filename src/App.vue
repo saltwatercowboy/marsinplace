@@ -126,7 +126,13 @@ import MarsScene from './components/MarsScene.vue'
 						<div class="toggle-content-how">
 							<span class="how-text">
 								<p>The left-hand 'filters' tab contains options for sorting the entries by date, medium, and scope</p>
+								<p>(TBC)</p>
 							</span>
+						</div>
+					</div>
+					<div class="how-choice">
+						<div class="toggle-content-how-video">
+							
 						</div>
 					</div>
 				</div>
@@ -156,12 +162,22 @@ import MarsScene from './components/MarsScene.vue'
 						</span>
 						<div class="toggle-content-FAQ">
 							<span class="FAQ-subheading">
-								<p>Where are the assets from?</p>
+								<p>Where is the background from?</p>
 							</span>
 							<span class="FAQ-text">
-								The starfield is a cubemap built from one of NASA's <a class="link-highlight" href="https://svs.gsfc.nasa.gov/4851/">Deep Star Maps</a>, itself assembled from a few different star catalogs.<br>
-								Mars' texture was created from NASA surface imagery (and released for free!) by the team at <a class="link-highlight" href="https://www.solarsystemscope.com/textures/">Solar System Scope</a>. I turned this into another cubemap and projected it onto a quadrilateralized spherical cube (quad sphere). I also generated displacement maps from it.<br>
-								The Deimos and Phobos models were created by Ernst, Daly, and Gaskell et al. in their extremely helpful <a class="link-highlight" href="https://earth-planets-space.springeropen.com/articles/10.1186/s40623-023-01814-7">2023 paper</a> - you can download the models directly from their Small Body Mapping Tool/SBMT site <a class="link-highlight" href="https://sbmt.jhuapl.edu/Object-Index.php">here</a> (.OBJ with 4 spatial resolution options).
+								The starfield is a cubemap built from one of NASA's <a class="link-highlight" href="https://svs.gsfc.nasa.gov/4851/">Deep Star Maps</a>, itself assembled from a few different star catalogs.
+							</span>
+							<span class="FAQ-subheading">
+								<p>Mars?</p>
+							</span>
+							<span class="FAQ-text">
+								Mars' texture was created from NASA surface imagery (and released for free!) by the team at <a class="link-highlight" href="https://www.solarsystemscope.com/textures/">Solar System Scope</a>. I turned this into another cubemap and projected it onto a quadrilateralized spherical cube (quad sphere). I also generated my displacement, ambient occlusion, and normal maps from it.
+							</span>
+							<span class="FAQ-subheading">
+								<p>Phobos & Deimos?</p>
+							</span>
+							<span class="FAQ-text">
+								The Deimos and Phobos models were proposed and created by Ernst, Daly, and Gaskell et al. in their extremely helpful <a class="link-highlight" href="https://earth-planets-space.springeropen.com/articles/10.1186/s40623-023-01814-7">2023 paper</a> - you can download the models directly from their Small Body Mapping Tool/SBMT site <a class="link-highlight" href="https://sbmt.jhuapl.edu/Object-Index.php">here</a> (.OBJ with 4 spatial resolution options).
 							</span>
 						</div>
 					</div>
@@ -174,7 +190,7 @@ import MarsScene from './components/MarsScene.vue'
 								<p>Tech stack?</p>
 							</span>
 							<span class="FAQ-text">
-								Three.js for rendering the scene and Vue 3 for the overlay/SPA reloading and general reactivity. Pin data are stored in rudimentary arrays of objects for now; this will change to SQLite in future.<br>
+								Three.js for rendering and animating the scene and Vue 3 for the overlay inc. SPA functionality and general reactivity. Pin data are stored in rudimentary arrays of objects for now; this will change to SQLite in future.<br>
 							</span>
 							<span class="FAQ-subheading">
 								<p>I found a bug - what can I do?</p>
@@ -807,8 +823,7 @@ body:has(#bar-suggest:hover) #show-top {
 	border-right: none;
 	background-color: rgba(255, 255, 255, 0.90);
 	z-index: 3;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 #guide-container-items {
@@ -820,6 +835,7 @@ body:has(#bar-suggest:hover) #show-top {
 	border-radius: 4px;
 	border-bottom-right-radius: 0px;
 	background-color: rgba(255, 255, 255, 1);
+	padding-bottom: 30px;
 }
 
 .container-close {
@@ -1011,6 +1027,7 @@ body:has(#bar-suggest:hover) #show-top {
 	border-bottom-right-radius: 8px;
 	overflow: scroll;
 	scroll-behavior: smooth;
+	padding-top: 20px;
 }
 
 .container-under-how span {
@@ -1028,13 +1045,12 @@ body:has(#bar-suggest:hover) #show-top {
 	margin: 10px;
 	margin-right: 0px;
 	border-top-left-radius: 4px;
-	padding-bottom: 20px;
 }
 
 .how-video {
 	position: relative;
 	width: 35%;
-	height: fit-content;
+	min-height: 35%;
 	min-width: 240px;
 	margin: 10px;
 	margin-left: 0px
@@ -1105,6 +1121,7 @@ body:has(#bar-suggest:hover) #show-top {
 .how-text {
 	position: relative;
 	width: 100%;
+	min-height: 40px;
 	font-size: 18px;
 	text-align: justify;
 	color: rgb(0,0,0);
@@ -1153,7 +1170,7 @@ body:has(#bar-suggest:hover) #show-top {
 	border-bottom-right-radius: 8px;
 	overflow: scroll;
 	scroll-behavior: smooth;
-	margin-top: 20px;
+	padding-top: 20px;
 }
 
 .toggle-content-FAQ {
@@ -1508,9 +1525,6 @@ canvas {
 }
 
 @media only screen and (max-width: 810px) {
-	#guide-container-items {
-		margin-bottom: 20px;
-	}
 
 	.toggle-content-FAQ {
 		width: 95%;

@@ -13,6 +13,7 @@
     "@fontsource/overpass-mono": "^5.0.18",
     "@material/shape": "^14.0.0",
     "leader-line": "^1.0.7",
+    "lil-gui": "^0.19.2",
     "serve": "^14.2.3",
     "three": "^0.165.0",
     "vue": "^3.4.29",

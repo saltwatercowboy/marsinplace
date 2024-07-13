@@ -34,7 +34,18 @@ class PinHead extends THREE.Mesh {
     this.jewelMesh = new THREE.Mesh(this.jewelGeometry, this.jewelMaterial);
     this.jewelActive = false;
     this.jewelSize = 0;
+
+    this.jewelMesh.name = 'rotationMesh';
+
+    this.jewelMesh.tick = (delta) => {
+      //this.jewelMesh.position.x = (1 / 24) * delta;
+      //console.log('x', this.jewelMesh.position.x);
+      //console.log('y', this.jewelMesh.position.y);
+      //console.log('z', this.jewelMesh.position.z);
+    }
+
   }
+
 }
 
 class Places {
@@ -155,7 +166,9 @@ class Places {
     Object.defineProperty(item, 'mesh', { value: line });
     Object.defineProperty(item, 'diamondMesh', { value: diamondMesh });
     Object.defineProperty(item, 'jewelMesh', { value: jewelMesh });
+
   }
+
 }
 
 export { Places };

@@ -17,7 +17,6 @@ export default {
     // Starting world
     areograph.start();
 
-    areograph.createAllMarkers();
   }
 }
 

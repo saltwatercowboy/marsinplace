@@ -17,7 +17,7 @@ function loadPhobos() {
       },
       (error) => {
         // Error handling
-        reject(new Error('An error happened during loading the model.'));
+        reject(new Error('An error happened during loading of the model.'));
       }
     );
   });
@@ -39,7 +39,7 @@ function loadDeimos() {
       },
       (error) => {
         // Error handling
-        reject(new Error('An error happened during loading the model.'));
+        reject(new Error('An error happened during loading of the model.'));
       }
     );
   });
@@ -49,6 +49,9 @@ async function createPhobosDeimos() {
   try {
     const phobosObj = await loadPhobos();
     const deimosObj = await loadDeimos();
+
+    phobosObj.name = 'moon';
+    deimosObj.name = 'moon';
 
     phobosObj.receiveShadow = true;
     phobosObj.color = 'white';

@@ -2,7 +2,9 @@
 
 import * as THREE from 'three';
 
-import { createCamera } from "./3d/MainCamera.js";
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
+
+import { createCamera, createFocusCamera } from "./3d/MainCamera.js";
 import { createQuadrilateralizedSphericalCube } from "./3d/Mars.js";
 import { createBackground } from "./3d/Background.js";
 import { createLight } from "./3d/Lighting.js";
@@ -29,6 +31,8 @@ let resizer;
 class Areograph {
   constructor(container) {
     this.camera = createCamera(container);
+    this.focusCamera = createFocusCamera(container);
+
     this.background = createBackground();
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
@@ -64,6 +68,12 @@ class Areograph {
     //animation
     loop = new Loop(this.camera, this.background, this.renderer, this.composer);
     loop.updatables.push(this.mars);
+
+    loop.updatables.push({ tick: () => this.focusCamera.tick(this.background) });
+
+    this.createAllMarkers();
+
+    console.log('mars name', this.mars.children);
 
     //load + add Phobos and Deimos
     this.loadAddMoons();
@@ -109,21 +119,81 @@ class Areograph {
       this.mars.add(i[index].mesh);
       this.mars.add(i[index].diamondMesh);
       this.mars.add(i[index].jewelMesh);
+
+      this.createLabel(i[index].diamondMesh);
+
     }
 
     for (let index = 0; index < j.length; index++) {
       this.mars.add(j[index].mesh);
       this.mars.add(j[index].diamondMesh);
       this.mars.add(j[index].jewelMesh);
+
+      this.createLabel(j[index].diamondMesh);
+
     }
+
+    this.mars.geometry.computeBoundingBox();
+
   }
 
-  createModal(item) {
+  createLabel(item) {
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 300;
+    canvas.height = 50;
+
+    //background
+    context.fillStyle = 'rgba(255, 255, 255, 0)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    //border
+    //context.lineWidth = 1;
+    //context.strokeRect(0, 0, canvas.width, canvas.height);
+
+    //header
+    context.fillStyle = '#FFFFFF'; // White text color
+    context.font = 'bold 18px Andale Mono';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+
+    //draw header test
+    context.fillText(item.data.placeName, canvas.width / 2, 25);
+
+    const texture = new THREE.CanvasTexture(canvas);
+
+    const geometry = new THREE.PlaneGeometry(50, 10);
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
+    let label = new THREE.Mesh(geometry, material);
+    //label.scale.set(50, 20, 1);
+    label.position.y = label.position.y + 5;
+
+    var targ = new THREE.Vector3();
+
+    console.log('tst', item.getWorldPosition(targ));
+
+    //label.position.set(targ);
+
+    label.isLabel = true;
+
+    item.add(label);
+    label.rotation.y = Math.PI;
+
+  }
+
+  createModals(item) {
     if (this.modal) {
         this.background.remove(this.modal);
         this.modal.geometry.dispose();
         this.modal.material.map.dispose();
         this.modal.material.dispose();
+
+        this.background.remove(this.imgModal);
+        this.imgModal.geometry.dispose();
+        this.imgModal.material.map.dispose();
+        this.imgModal.material.dispose();
+        
     }
 
     const canvas = document.createElement('canvas');
@@ -137,7 +207,7 @@ class Areograph {
 
     //border
     context.strokeStyle = '#00FFFF'; // Cyan border color
-    context.lineWidth = 5;
+    context.lineWidth = 2;
     context.strokeRect(0, 0, canvas.width, canvas.height);
 
     //header
@@ -170,7 +240,7 @@ class Areograph {
 
     //description
     context.fillStyle = '#CCCCCC';
-    context.font = 'italic 16px Arial';
+    context.font = 'italic 16px Univers';
     context.textAlign = 'left';
     context.textBaseline = 'top';
 
@@ -197,15 +267,23 @@ class Areograph {
     }
     context.fillText(line, x, y);
 
-    const texture = new THREE.CanvasTexture(canvas);
-
     const geometry = new THREE.PlaneGeometry(45, 85);
-    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
-    this.modal = new THREE.Mesh(geometry, material);
+    const normTexture = new THREE.CanvasTexture(canvas);
 
+    const material = new THREE.SpriteMaterial({ map: normTexture, transparent: true, side: THREE.DoubleSide });    
+
+    var imgMap = new THREE.TextureLoader().load( item.photoFile );
+    var imgMaterial = new THREE.SpriteMaterial( { map: imgMap, color: 0xffffff } );
+    this.imgModal = new THREE.Sprite( imgMaterial );
+
+    this.imgModal.isModal = true;
+
+    this.modal = new THREE.Sprite( material );
+    this.modal.scale.set(50, 100, 1);
     this.modal.isModal = true;
 
     this.background.add(this.modal);
+    this.background.add(this.imgModal);
   }
 
   onMouseMove(event) {
@@ -217,16 +295,15 @@ class Areograph {
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersects = this.raycaster.intersectObjects(this.background.children, true);
 
-
     if (intersects.length > 0) {
       const object = intersects[0].object;
-      if (object.isModal) {
+      if (object.isModal || object.isLabel) {
         return; //skip hover effects for modal
       }
       if (this.hoveredObject !== object) {
         if (this.hoveredObject) {
           if (this.hoveredObject.material && this.hoveredObject.material.color && !this.hoveredObject.isLine) {
-            this.hoveredObject.material.color.set(this.hoveredObject.originalColor);
+            this.hoveredObject.material.color.set('gold');
             this.hoveredObject.material.wireframe = true;
           }
         }
@@ -235,6 +312,9 @@ class Areograph {
           this.hoveredObject.originalColor = object.material.color.getHex();
           this.hoveredObject.material.color.set('gold');
           this.hoveredObject.material.wireframe = false;
+
+          //this.camera.position.copy(pin.position).multiplyScalar(2);
+    
         }
       }
     } else {
@@ -252,19 +332,27 @@ class Areograph {
     event.preventDefault();
     if (this.hoveredObject) {
       if (this.hoveredObject.material && this.hoveredObject.material.color) {
-        this.hoveredObject.material.color.set(this.hoveredObject.originalColor);
       }
-      const pin = this.hoveredObject;
 
-      this.createModal(pin.data);
-      
-      this.modal.position.copy(pin.position).multiplyScalar(1.1);
-      this.modal.position.z = this.modal.position.z + 50;
+      var targ = new THREE.Vector3();
 
-      this.camera.position.copy(pin.position).multiplyScalar(2);
+      console.log(this.hoveredObject.getWorldPosition(targ));
+
+      //console.log(this.hoveredObject.children[2].position);
+
+      var pin = this.hoveredObject;
+
+      this.createModals(pin.data);
+
+      this.imgModal.scale.set(50, 50, 1);
+      this.imgModal.position.copy(targ).multiplyScalar(1.41);
+      this.modal.position.copy(targ).multiplyScalar(1.41);
+      this.modal.position.y -= 40;
+
+      this.imgModal.position.y += 45;
+
+      this.camera.position.copy(targ).multiplyScalar(2.4);
       this.camera.lookAt(0,0,0);
-
-      this.modal.lookAt(this.camera.position);
 
       this.hoveredObject = null;
     }
