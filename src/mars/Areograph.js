@@ -33,6 +33,8 @@ class Areograph {
     this.camera = createCamera(container);
     this.focusCamera = createFocusCamera(container);
 
+    this.placeholderImg = new THREE.TextureLoader().load('/marsisaplace/modal/placeholder.png'); //placeholder until deployment to sidestep gh-pages fetch issue
+
     this.background = createBackground();
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
@@ -272,7 +274,9 @@ class Areograph {
 
     const material = new THREE.SpriteMaterial({ map: normTexture, transparent: true, side: THREE.DoubleSide });    
 
-    var imgMap = new THREE.TextureLoader().load( item.photoFile );
+    var imgMap = new THREE.TextureLoader().load( item.photoFile ); //placeholder until deployment
+    //var imgMap = this.placeholderImg; //placeholder
+
     var imgMaterial = new THREE.SpriteMaterial( { map: imgMap, color: 0xffffff } );
     this.imgModal = new THREE.Sprite( imgMaterial );
 
