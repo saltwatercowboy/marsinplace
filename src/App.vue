@@ -314,7 +314,6 @@ import MarsScene from './components/MarsScene.vue'
 			</div>
 		</Transition>
 
-
 		<MarsScene @click="handleModals()"/>
 	</div>
 </template>
@@ -334,11 +333,18 @@ export default {
 			guideWhat: false,
 			guideFAQ: false,
 
+			isLoading: true,
+			loadingHistory: [],
+
 			showEmailDisclaimer: false,
 		}
 	},
 
 	methods: {
+
+		handleLoadingBar(loadingHistory) {
+			
+		},
 
 		handleNavBar(state) {
 			switch(state) {
@@ -538,8 +544,6 @@ export default {
 	--guideFAQ-font-weight: 200;
 	--guideFAQ-font-size: 34px;
 	--guideFAQ-shadow: none;
-
-
 }
 
 #app {
@@ -1075,7 +1079,7 @@ body:has(#bar-suggest:hover) #show-top {
 	font-size: 26px;
 }
 
-.how-choice-text::after{
+.how-choice-text:after{
 	position: absolute;
 	content: '';
 	display: block;

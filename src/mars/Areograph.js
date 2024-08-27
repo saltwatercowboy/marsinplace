@@ -30,6 +30,9 @@ let resizer;
 
 class Areograph {
   constructor(container) {
+
+    this.events = {};
+
     this.camera = createCamera(container);
     this.focusCamera = createFocusCamera(container);
 
@@ -41,6 +44,8 @@ class Areograph {
     this.hoveredObject = null;
 
     this.mars = createQuadrilateralizedSphericalCube();
+
+    this.mars.loadingComplete = false;
 
     this.renderer = createRenderer();
     container.append(this.renderer.domElement);
@@ -77,12 +82,17 @@ class Areograph {
 
     console.log('mars name', this.mars.children);
 
+
     //load + add Phobos and Deimos
     this.loadAddMoons();
+
+    this.loadingText = null;
 
     //event listeners
     container.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     container.addEventListener('click', this.onClick.bind(this), false);
+
+
   }
 
   async loadAddMoons() {
@@ -92,19 +102,42 @@ class Areograph {
       this.background.add(this.phobos);
       this.background.add(deimos);
       loop.updatables.push({ tick: () => phobos.tick(this.background) });
+      this.mars.loadingComplete = true;
+      this.emit('loadingDone', {message: 'Loading done.'});
+      console.log('Moons loaded');
     } catch (error) {
       console.error('Error loading moons:', error);
     }
   }
 
   //render removed
-
   start() {
     loop.start();
   }
 
   stop() {
     loop.stop();
+  }
+
+  on(event, listener) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(listener);
+  }
+
+  off(event, listener) {
+    if (!this.events[event]) return;
+    this.events[event] = this.events[event].filter(l => l !== listener);
+  }
+
+  emit(event, data) {
+    if (!this.events[event]) return;
+    this.events[event].forEach(listener => listener(data));
+  }
+
+  handleLoadingState() {
+    this.emit('loading', {message: 'Loading assets...'});
   }
 
   //!todo restructure getPinsData to accept multiple filtering arguments and return a new array of pin objects
