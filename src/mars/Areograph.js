@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
 
 import { createCamera, createFocusCamera } from "./3d/MainCamera.js";
-import { createQuadrilateralizedSphericalCube } from "./3d/Mars.js";
+import { createQuadrilateralizedSphericalCube, createOverlay } from "./3d/Mars.js";
 import { createBackground } from "./3d/Background.js";
 import { createLight } from "./3d/Lighting.js";
 import { createPhobosDeimos } from "./3d/PhobosDeimos.js";
@@ -24,6 +24,8 @@ import { GlitchPass } from 'three/addons/postprocessing/GlitchPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SSAARenderPass } from 'three/addons/postprocessing/SSAARenderPass.js';
 
+import { TransformControls } from 'three/addons/controls/TransformControls.js';
+
 let loop;
 let controls;
 let resizer;
@@ -32,6 +34,8 @@ class Areograph {
   constructor(container) {
 
     this.events = {};
+
+    this.showOverlay = false;
 
     this.camera = createCamera(container);
     this.focusCamera = createFocusCamera(container);
@@ -44,6 +48,7 @@ class Areograph {
     this.hoveredObject = null;
 
     this.mars = createQuadrilateralizedSphericalCube();
+    this.overlay = createOverlay();
 
     this.mars.loadingComplete = false;
 
@@ -51,12 +56,12 @@ class Areograph {
     container.append(this.renderer.domElement);
 
     //add Mars
-    this.background.add(this.mars);
+    this.background.add(this.mars, this.overlay);
 
     //lighting
-    const { mainLight, softenerLightLower, ambientLight } = createLight();
+    const { mainLight, softenerLightLower, ambientLight, overlayLight } = createLight();
     this.mainLight = mainLight;
-    this.background.add(mainLight, softenerLightLower, ambientLight);
+    this.background.add(mainLight, softenerLightLower, ambientLight, overlayLight);
 
     // Camera controls
     controls = createControls(this.camera, container);
@@ -74,14 +79,13 @@ class Areograph {
 
     //animation
     loop = new Loop(this.camera, this.background, this.renderer, this.composer);
-    loop.updatables.push(this.mars);
+    loop.updatables.push(this.mars, this.overlay);
 
     loop.updatables.push({ tick: () => this.focusCamera.tick(this.background) });
 
     this.createAllMarkers();
 
     console.log('mars name', this.mars.children);
-
 
     //load + add Phobos and Deimos
     this.loadAddMoons();
@@ -91,7 +95,6 @@ class Areograph {
     //event listeners
     container.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     container.addEventListener('click', this.onClick.bind(this), false);
-
 
   }
 
@@ -138,6 +141,16 @@ class Areograph {
 
   handleLoadingState() {
     this.emit('loading', {message: 'Loading assets...'});
+  }
+
+  handleOverlay() {
+    if ( this.showOverlay == true ) {
+      this.overlay.scale.set(0, 0, 0)
+      this.showOverlay = false;
+    } else if ( this.showOverlay == false ) {
+      this.overlay.scale.set(1, 1, 1)
+      this.showOverlay = true;
+    }
   }
 
   //!todo restructure getPinsData to accept multiple filtering arguments and return a new array of pin objects
@@ -334,7 +347,7 @@ class Areograph {
 
     if (intersects.length > 0) {
       const object = intersects[0].object;
-      if (object.isModal || object.isLabel) {
+      if (object.isModal || object.isLabel || object.isOverlay) {
         return; //skip hover effects for modal
       }
       if (this.hoveredObject !== object) {

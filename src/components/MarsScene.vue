@@ -7,6 +7,9 @@
         </div>
       </span>
     </div>
+    <div id="overlay-select-wrapper">
+      <button @click="handleOverlay()">Toggle region overlay</button>
+    </div>
   </div>
 </template>
 
@@ -25,22 +28,26 @@ export default {
 
     const container = this.$el;
 
-    const areograph = new Areograph(container);
+    this.areograph = new Areograph(container);
 
-    console.log(areograph)
+    console.log(this.areograph)
 
-    areograph.start();
+    this.areograph.start();
 
-    areograph.on('loadingDone', this.handleLoadingMessage);
+    this.areograph.on('loadingDone', this.handleLoadingMessage);
 
   },
   
   methods: {
 
-    handleLoadingMessage( ) {
+    handleLoadingMessage() {
       this.marsLoaded = true;
       console.log(this.marsLoaded);
-    }
+   },
+
+    handleOverlay() {
+      this.areograph.handleOverlay();
+    },
 
   }
 
@@ -103,6 +110,14 @@ export default {
   bottom:0;
   left:0;
   animation:borealisBar 2s linear infinite;
+}
+
+#overlay-select-wrapper {
+  position: fixed;
+  left: 0%;
+  bottom: 0%;  
+  color: #000000;
+  z-index: 2;
 }
 
 @keyframes borealisBar {

@@ -7,6 +7,7 @@ function createCamera(container) {
     const camera = new THREE.PerspectiveCamera(45, WIDTH/HEIGHT, 1, 10000);
 
     camera.position.set(480,12,700);
+
     
     return camera;
 }

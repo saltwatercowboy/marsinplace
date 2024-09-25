@@ -23,6 +23,40 @@ function createCubeMaterial() {
   return materials
 }
 
+function createOverlay() {
+  
+  const overlayLoader = new THREE.TextureLoader();
+
+  const overlayTexture = overlayLoader.load('textures/mars/mars-overlay-2.png');
+
+  const geo = new THREE.SphereGeometry(207, 32, 32);
+  const mat = new THREE.MeshPhongMaterial({
+    map: overlayTexture,
+    transparent: true,
+    depthTest: true,
+    side: THREE.DoubleSide,
+    emissive: '#ccd2ff',
+    emissiveIntensity: 1,
+    shininess: 60,
+    precision: "highp",
+    dithering: true,
+    flatShading: true,
+    color: '#000000'
+  });
+
+  const overlayMesh = new THREE.Mesh(geo, mat);
+
+  overlayMesh.isOverlay = true;
+  overlayMesh.name = 'overlay';
+
+  overlayMesh.tick = (delta) => {
+    overlayMesh.rotation.y += (1 / 48 ) * delta;
+  };
+
+  return overlayMesh;
+
+}
+
 function createQuadrilateralizedSphericalCube() {
 
   const r = 200;
@@ -67,4 +101,4 @@ function createQuadrilateralizedSphericalCube() {
   return cube
 }
 
-export { createQuadrilateralizedSphericalCube };
+export { createOverlay, createQuadrilateralizedSphericalCube };
