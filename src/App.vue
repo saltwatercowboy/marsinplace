@@ -65,13 +65,13 @@ import MarsScene from './components/MarsScene.vue'
 						<div class="toggle-content">
 							<span class="what-text">
 								<br>
-								<p>Mars is a place. It can be thought of as a cousin to Earth - a terrestrial planet, under the same sun, that's about the same age. The more we know about our cousin, the more we might learn about Earth, the origins of our solar system, and even the prerequisites and potentiates for life. It's a neighbourhood mystery - and yet our understanding has only recently begun to reflect Mars as it really is.
+								<p>Over the past 70 years, researchers have clarified our image of Mars into a sparse, cold, and unforgiving place. We're extremely lucky to see it. Our sense of Mars is more concrete now than at any time before.
 								<br><br>
-								In the past 70 years, countless missions, projects, and investigations have clarified our mind's eye image of Mars as a sparse, cold, and inhospitable place. We're extremely lucky to see this reality. We get to view another world from the level of an observer on the surface. Our sense of Mars is more concrete than anyone before us. 
+								The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life. It's a neighbourhood mystery - and our understanding has only recently begun to reflect Mars as it really is.
 								<br><br>
-								But each discovery also moves us away from fantastical concepts that we previously projected onto the planet - and we have no history for it but these ideas. Mars has no legends, no tombs, monuments, wars, triumphs or messiahs. It's a blank slate without us.
+								But each discovery also moves us away from the fantastical stories we made up when we knew less - and there is no history for it but in our stories. Mars has no nations, tombs, monuments, wars, legends, or triumphs. It's a blank slate without us.
 								<br><br>
-								<i>Mars is a Place</i> tries to construct and root previous stories and ideas of and on Mars by mapping them to its surface. Some ideas are old and some are new, but each can reveal at least part of a long-standing tradition.</p>
+								<i>Mars is a Place</i> explores projections of Mars by cataloguing, explaining, and mapping them. Some are old and some are new. Some are contemporaneous to the telling, while others explore our relationship far into the future. Each reveals a part of a long-standing tradition.</p>
 							</span>
 						</div>
 						<span class="guide-choice-text">
@@ -118,6 +118,17 @@ import MarsScene from './components/MarsScene.vue'
 						<video class="toggle-content-how-video" loop autoplay>
 							<source src="/video/clickWeb.webm" type="video/webm">
 						</video>
+					</div>
+					<div class="how-choice">
+						<span class="how-choice-text">
+							Overlay
+						</span>
+						<div class="toggle-content-how">
+							<span class="how-text">
+								<p>Toggle the overlay on and off by clicking the button in the bottom left</p>
+								<p>Areas of the overlay correspond to the real regions on Mars' surface</p>
+							</span>
+						</div>
 					</div>
 					<div class="how-choice">
 						<span class="how-choice-text">

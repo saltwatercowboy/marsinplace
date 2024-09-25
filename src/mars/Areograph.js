@@ -41,6 +41,7 @@ class Areograph {
     this.focusCamera = createFocusCamera(container);
 
     this.placeholderImg = new THREE.TextureLoader().load('/marsisaplace/modal/placeholder.png'); //placeholder until deployment to sidestep gh-pages fetch issue
+    this.siasl = new THREE.TextureLoader().load('/marsisaplace/modal/siasl.png');
 
     this.background = createBackground();
     this.raycaster = new THREE.Raycaster();
@@ -95,6 +96,8 @@ class Areograph {
     //event listeners
     container.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     container.addEventListener('click', this.onClick.bind(this), false);
+
+    this.handleOverlay();
 
   }
 
@@ -240,8 +243,7 @@ class Areograph {
         this.background.remove(this.imgModal);
         this.imgModal.geometry.dispose();
         this.imgModal.material.map.dispose();
-        this.imgModal.material.dispose();
-        
+        this.imgModal.material.dispose();    
     }
 
     const canvas = document.createElement('canvas');
