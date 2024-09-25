@@ -179,6 +179,12 @@ import MarsScene from './components/MarsScene.vue'
 							<span class="FAQ-text">
 								The Deimos and Phobos models were proposed and created by Ernst, Daly, and Gaskell et al. in their extremely helpful <a class="link-highlight" href="https://earth-planets-space.springeropen.com/articles/10.1186/s40623-023-01814-7">2023 paper</a> - you can download the models directly from their Small Body Mapping Tool/SBMT site <a class="link-highlight" href="https://sbmt.jhuapl.edu/Object-Index.php">here</a> (.OBJ with 4 spatial resolution options).
 							</span>
+							<span class="FAQ-subheading">
+								<p>Region overlay?</p>
+							</span>
+							<span class="FAQ-text">
+								The region overlay is adapted (with permission) from a <a class="link-highlight" href="https://www.deviantart.com/etohautakuva/art/Mars-Geographic-Regions-Map-v0-1-917110370">map by the artist Etohautakuva.</a> They compiled data from the USGS/NASA to create an approximation of Martian regional boundaries as recognised by the International Astronomical Union (IAU).
+							</span>
 						</div>
 					</div>
 					<div class="FAQ-choice">
