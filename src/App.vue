@@ -21,7 +21,7 @@ import MarsScene from './components/MarsScene.vue'
 					<div id="logo-mars-bg">
 						<span id="logo-former">MARS</span>
 					</div>
-					<span id="logo-latter">is a <u>place</u></span>
+					<span id="logo-latter">in place</span>
 				</div>
 				<div id="bar-buffer"></div>
 				<div id="top-bar-items">
@@ -65,13 +65,13 @@ import MarsScene from './components/MarsScene.vue'
 						<div class="toggle-content">
 							<span class="what-text">
 								<br>
-								<p>Over the past 70 years, researchers have clarified our image of Mars into a sparse, cold, and unforgiving place. We're extremely lucky to see it. Our sense of Mars is more concrete now than at any time before.
+								<p>Over the past 70 years, researchers have clarified our image of Mars into a sparse, cold, and unforgiving place. We're extremely lucky to see it.
+								
+								The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life. It's a neighbourhood mystery that we've only recently begun to grok.
 								<br><br>
-								The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life. It's a neighbourhood mystery - and our understanding has only recently begun to reflect Mars as it really is.
+								Yet this knowledge also moves us away from the fantastical stories we made up when we knew less - and there is no history for it but in our stories. Mars has no nations, tombs, monuments, wars, legends, or triumphs. It's a blank slate without us.
 								<br><br>
-								But each discovery also moves us away from the fantastical stories we made up when we knew less - and there is no history for it but in our stories. Mars has no nations, tombs, monuments, wars, legends, or triumphs. It's a blank slate without us.
-								<br><br>
-								<i>Mars is a Place</i> explores projections of Mars by cataloguing, explaining, and mapping them. Some are old and some are new. Some are contemporaneous to the telling, while others explore our relationship far into the future. Each reveals a part of a long-standing tradition.</p>
+								<i>Mars in Place</i> explores projections of Mars by cataloguing, explaining, and mapping them. Some are old and some are new. Some are contemporaneous to the telling, while others explore our relationship far into the future. Each reveals a part of a long-standing tradition.</p>
 							</span>
 						</div>
 						<span class="guide-choice-text">
@@ -968,7 +968,8 @@ body:has(#bar-suggest:hover) #show-top {
 	height: 70%;
 	max-height: 70%;
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -1041,7 +1042,8 @@ body:has(#bar-suggest:hover) #show-top {
 	height: 80%;
 	max-height: 75%;
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	background-color: rgba(200, 200, 200, 0);
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 8px;
@@ -1185,7 +1187,8 @@ body:has(#bar-suggest:hover) #show-top {
 	height: 70%;
 	max-height: 70%;
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -1304,7 +1307,8 @@ body:has(#bar-suggest:hover) #show-top {
 	height: 100%;
 	background-color: rgba(255, 255, 255, 1);
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 8px;
 }
@@ -1314,7 +1318,8 @@ body:has(#bar-suggest:hover) #show-top {
 	color: rgb(255, 255, 255);
 	background-color: rgba(238, 238, 238, 1);
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 }
 
 #suggest-container {
@@ -1351,7 +1356,8 @@ body:has(#bar-suggest:hover) #show-top {
 	height: 95%;
 	max-height: 95%;
 	z-index: 3;
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	border-top-right-radius: 8px;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -1377,7 +1383,8 @@ body:has(#bar-suggest:hover) #show-top {
 	border-radius: 8px;
 	border-top-left-radius: 0px;
 	box-shadow: 0 1px 3px inset rgba(0,0,0,0.12), 0 1px 2px inset rgba(0,0,0,0.24);
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-weight: 0;
 	font-size: 14px;
 }
 
