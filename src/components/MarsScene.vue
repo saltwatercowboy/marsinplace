@@ -81,7 +81,7 @@ export default {
     },
 
     handleLoadingMessage() {
-      this.marsLoaded = false;
+      this.marsLoaded = true;
       console.log(this.marsLoaded);
    },
 
