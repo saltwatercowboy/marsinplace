@@ -65,13 +65,13 @@ import MarsScene from './components/MarsScene.vue'
 						<div class="toggle-content">
 							<span class="what-text">
 								<br>
-								<p>Over the past 70 years, researchers have clarified our image of Mars into a sparse, cold, and unforgiving place. We're extremely lucky to see it.
-								
-								The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life. It's a neighbourhood mystery that we've only recently begun to grok.
+								<p>Throughout the 20th century, and particularly since the <a class="link-highlight" href="https://svs.gsfc.nasa.gov/4851/">Mariner program</a>, our concept of Mars has become clearer and clearer. We now know it as a sparse, cold, and unforgiving planet.
 								<br><br>
-								Yet this knowledge also moves us away from the fantastical stories we made up when we knew less - and there is no history for it but in our stories. Mars has no nations, tombs, monuments, wars, legends, or triumphs. It's a blank slate without us.
+								We're extremely lucky to live to see this change. The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life.
 								<br><br>
-								<i>Mars in Place</i> explores projections of Mars by cataloguing, explaining, and mapping them. Some are old and some are new. Some are contemporaneous to the telling, while others explore our relationship far into the future. Each reveals a part of a long-standing tradition.</p>
+								But a clarified image of Mars also moves us away from the fantastical stories we made up when we knew less. There is no history on Mars - only a patchwork of projections, stories, and myths. It's a blank slate without us.
+								<br><br>
+								<i>Mars in Place</i> explores ideas of Mars by collating, cataloguing, and mapping them to the planet itself. Some are old, some are new. Many are contemporaneous with their authors, while others explore far into the future. Each can reveal a part of a long-standing tradition.</p>
 							</span>
 						</div>
 						<span class="guide-choice-text">

@@ -1,6 +1,6 @@
 //PlacesData.js
 
-const base = '/marsisaplace'
+const base = '/marsinplace'
 
 const placeData = {
 
