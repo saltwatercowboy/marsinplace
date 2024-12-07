@@ -65,13 +65,13 @@ import MarsScene from './components/MarsScene.vue'
 						<div class="toggle-content">
 							<span class="what-text">
 								<br>
-								<p>Throughout the 20th century, and particularly since the <a class="link-highlight" href="https://svs.gsfc.nasa.gov/4851/">Mariner program</a>, our concept of Mars has become clearer and clearer. We now know it as a sparse, cold, and unforgiving planet.
+								<p>During the 20th century, and particularly due to the <a class="link-highlight" href="https://svs.gsfc.nasa.gov/4851/">Mariner program</a>, our view of Mars became clearer and clearer.
 								<br><br>
-								We're extremely lucky to live to see this change. The more we know, the more we might learn about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life.
+								We're extremely lucky to live to see this change. The more we learn, the more we might find out about our own planet, the origins of our solar system, and maybe even the prerequisites and potentiates for life.
 								<br><br>
-								But a clarified image of Mars also moves us away from the fantastical stories we made up when we knew less. There is no history on Mars - only a patchwork of projections, stories, and myths. It's a blank slate without us.
+								But a clarified image of Mars also moves us away from the fantastical stories we made up when we knew less. There is no real history for Mars - only a patchwork of projections, stories, and myths. It's a blank slate without us.
 								<br><br>
-								<i>Mars in Place</i> explores ideas of Mars by collating, cataloguing, and mapping them to the planet itself. Some are old, some are new. Many are contemporaneous with their authors, while others explore far into the future. Each can reveal a part of a long-standing tradition.</p>
+								<i>Mars in Place</i> explores historical and fictional ideas of Mars by collating, cataloguing, and mapping them to the planet itself. By placing them next to one another, Mars in Place hopes to reveal part of a long-standing tradition.</p>
 							</span>
 						</div>
 						<span class="guide-choice-text">
@@ -163,7 +163,7 @@ import MarsScene from './components/MarsScene.vue'
 								<p>How accurate is Mars' surface?</p>
 							</span>
 							<span class="FAQ-text">
-								Mars is depicted in the middle of its northern summer. The planet has a polar tilt of 25&deg;, similar to Earth's 23.5&deg;, which is part of the reason it experiences seasons as well as polar nights/summers.
+								Mars is depicted in the middle of its northern summer. The planet has a polar tilt of 25&deg;, similar to Earth's 23.5&deg;, which is part of the reason it experiences seasons as well as polar nights/days.
 							</span>
 						</div>
 					</div>
